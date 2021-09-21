@@ -1,7 +1,8 @@
 public class TD_Jeux {
 
     public static void main(String[] args) {
-        resoudre(20);
+        resoudre(3);
+        remplir(3);
     }
 
     public static void resoudreAux(int n, int i, int j){
@@ -41,5 +42,22 @@ public class TD_Jeux {
         if(n>0)
             return  (2 * calculSuite(n-1));
         return 1;
+    }
+
+    public void remplir(int n){
+        if(n==1){
+            System.out.println("*");
+        }
+        if(n>1){
+            vider(n-1);
+        }
+
+
+    }
+    public void vider(int n){
+        if(n==1){
+            System.out.println(".");
+        }
+         remplir(n-1);
     }
 }
