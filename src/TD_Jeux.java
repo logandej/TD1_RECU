@@ -2,7 +2,6 @@ public class TD_Jeux {
 
     public static void main(String[] args) {
         resoudre(3);
-        remplir(3);
     }
 
     public static void resoudreAux(int n, int i, int j){
