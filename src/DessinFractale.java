@@ -124,6 +124,25 @@ class DessinFractale{
     	DragonAux(l,n,1);
 	}
 
+	public void tour(double l , int n){
+    	if(n==0){
+    		bob.forward(l);
+		}
+    	else {
+    		bob.left(90);
+    		bob.forward(l);
+    		bob.right(90);
+    		bob.forward(l/4);
+
+    		tour(l/2,n-1);
+
+			bob.forward(l/4);
+    		bob.right(90);
+			bob.forward(l);
+    		bob.left(90);
+		}
+	}
+
 
     public static void main(String[] args){
 
@@ -136,7 +155,7 @@ class DessinFractale{
 		//d.Arbre(800,6);
 		d.bob.clear();
 		//d.Triforce(1800,6);
-		d.Dragon(300,15);
+		d.tour(500000,15);
 		Turtle.zoomFit();
     }
     

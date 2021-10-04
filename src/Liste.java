@@ -67,13 +67,37 @@ public class Liste {
         return  res;
     }
 
+    public static Liste concatV1(Liste l1, Liste l2){
+        if(estVide(l1) || estVide(l2)){
+            return null;
+        }
+        Liste res = ajoutFinV1(l1, l2.val);
+        concatV1(l1,l2.suiv);
+        return res;
+    }
+
+    public static Liste concatV2(Liste l1, Liste l2){
+        if(estVide(l1) || estVide(l2)){
+            return null;
+        }
+        Liste res = l1.copie(l2);
+        ajoutFinV1(res,l2.val);
+        concatV1(res,l2.suiv);
+        return res;
+    }
+
     public static void main(String[] args) {
-        Liste liste = new Liste(6);
-        Liste liste1 = new Liste(3, liste);
-        Liste liste2 = new Liste(2, liste1);
+        Liste liste = new Liste(3);
+        Liste liste1 = new Liste(2, liste);
+        Liste liste2 = new Liste(1, liste1);
+
+        Liste liste11 = new Liste(8);
+        Liste liste22 = new Liste(7, liste11);
+        Liste liste33 = new Liste(89, liste22);
 
         liste.copie(liste1);
         liste.copie(liste2);
+
 
 
         System.out.println(toString(liste2));
@@ -81,6 +105,30 @@ public class Liste {
         System.out.println(croissant(liste2));
         ajoutFinV1(liste2, 1);
         System.out.println(toString(liste2));
+
+
+
+        liste11.copie(liste22);
+        liste11.copie(liste33);
+
+       /* System.out.println("\n\nConcate");
+        System.out.println(toString(liste33));
+        Liste listeconcat = concatV1(liste2,liste33);
+        System.out.println(toString(listeconcat));*/
+
+        System.out.println("testConcate");
+        Liste resc = concatV2(liste2, liste33);
+        System.out.println(toString(resc));
+        liste1.suiv.val= 20;
+        liste2.suiv.val= 50;
+        System.out.println(toString(resc));
+
+       /* System.out.println("\n\nConcate2");
+        System.out.println(toString(liste33));
+        Liste listeconcat2 = concatV2(liste2,liste33);
+        System.out.println(toString(listeconcat2));*/
+
+
     }
 }
 
