@@ -16,6 +16,16 @@ public class Arbre {
         filsD = fd;
     }
 
+    public Arbre copie(Arbre a){
+//action : retourne une copie de l (en recopiant tous les maillons)
+        if(estVide(a)){
+            return null;
+        }
+        else{
+            return new Arbre(a.val, copie(a.filsD), copie(a.filsG));
+        }
+    }
+
     public static boolean estVide(Arbre a){
         return a==null;
     }
@@ -53,19 +63,36 @@ public class Arbre {
     }
 
     public static boolean pereFilsEgaux(Arbre a){
-        if(estVide(a.filsG)||estVide(a.filsD)){
+        if(estVide(a)){
             return false;
         }
-        if(a.filsD.val== a.val || a.filsG.val==a.val){
-            return true;
+        if(!estVide(a.filsG)){
+            if(a.val==a.filsG.val)
+                return true;
         }
-        return pereFilsEgaux(a.filsG) || pereFilsEgaux(a.filsD);
+        if(!estVide(a.filsD)){
+            if(a.val==a.filsD.val)
+                return true;
+        }
+        return pereFilsEgaux(a.filsD) || pereFilsEgaux(a.filsG);
+    }
+    public static Arbre symetrie (Arbre a){
+        if(estVide(a)){
+            return null;
+        }
+        Arbre as = a.copie(a.filsD);
+        a.filsD = a.copie(a.filsG);
+        a.filsG = as;
+
+        return a;
+
+
     }
     public static void main(String[] args) {
-        Arbre A7 = new Arbre(1,null,null);
-        Arbre A6 = new Arbre(5,null,null);
-        Arbre A5 = new Arbre(5,null,A7);
-        Arbre A4 = new  Arbre(5,A6 ,A5);
+        Arbre A7 = new Arbre(4,null,null);
+        Arbre A6 = new Arbre(2,null,null);
+        Arbre A5 = new Arbre(4,null,A7);
+        Arbre A4 = new  Arbre(3,A6 ,A5);
         Arbre A3 = new  Arbre(3,null ,A4);
         Arbre A2 = new  Arbre(2,null ,null);
         Arbre A1 = new  Arbre(1,A2 ,A3);
@@ -73,7 +100,9 @@ public class Arbre {
         System.out.println("nombre de l'arbre = "+nbEntiers(A1));
         System.out.println(toString(A1," "));
         System.out.println("nombre de feuilles = "+nbFeuilles(A1));
-        System.out.println(recherche(A1,5));
+        System.out.println("recherche "+recherche(A1,1));
         System.out.println(pereFilsEgaux(A1));
+        Arbre AS = symetrie(A1);
+        System.out.println(toString(AS,""));
     }
 }
