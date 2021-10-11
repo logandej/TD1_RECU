@@ -86,15 +86,28 @@ public class Arbre {
         a.filsG = as;
 
         return ass;
+    }
+    public static int meilleurChemin(Arbre a){
+        int temp = 0;
+        if(estVide(a)){
+            return 0;
+        }
+        else {
+            if (a.filsD.val < a.filsG.val)
+                return temp += meilleurChemin(a.filsD);
+            if (a.filsD.val > a.filsG.val)
+                return temp += meilleurChemin(a.filsG);
 
 
+            return temp + a.val;
+        }
     }
     public static void main(String[] args) {
         Arbre A7 = new Arbre(4,null,null);
         Arbre A6 = new Arbre(2,null,null);
         Arbre A5 = new Arbre(4,null,A7);
         Arbre A4 = new  Arbre(3,A6 ,A5);
-        Arbre A3 = new  Arbre(3,null ,A4);
+        Arbre A3 = new  Arbre(3,null ,null);
         Arbre A2 = new  Arbre(2,null ,null);
         Arbre A1 = new  Arbre(1,A2 ,A3);
 
@@ -105,7 +118,6 @@ public class Arbre {
         System.out.println(pereFilsEgaux(A1));
         Arbre AS = symetrie(A1);
         System.out.println(toString(AS,""));
-        A1.val = 2;
-        System.out.println(toString(AS,""));
+        System.out.println("somme moindre: "+meilleurChemin(A1));
     }
 }
