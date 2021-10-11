@@ -80,11 +80,12 @@ public class Arbre {
         if(estVide(a)){
             return null;
         }
+        Arbre ass = a.copie(a);
         Arbre as = a.copie(a.filsD);
         a.filsD = a.copie(a.filsG);
         a.filsG = as;
 
-        return a;
+        return ass;
 
 
     }
@@ -103,6 +104,8 @@ public class Arbre {
         System.out.println("recherche "+recherche(A1,1));
         System.out.println(pereFilsEgaux(A1));
         Arbre AS = symetrie(A1);
+        System.out.println(toString(AS,""));
+        A1.val = 2;
         System.out.println(toString(AS,""));
     }
 }
